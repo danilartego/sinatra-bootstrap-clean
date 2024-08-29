@@ -49,8 +49,8 @@ post "/visit" do
     phone: @phone,
     datestamp: @datetime,
     barber: @barber,
-    color: @color,
+    color: @color
   )
 
-  erb "Спасибо Вы записались"
+  erb "<h2>Спасибо Вы записались</h2>"
 end
