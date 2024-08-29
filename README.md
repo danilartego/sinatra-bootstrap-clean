@@ -74,25 +74,6 @@ require "./app"
 require "sinatra/activerecord/rake"
 ```
 
-> У меня в Debian не заработало, выпадали ошибки. Удалил ruby и поставил всё через rvm - https://rvm.io/
-
-### Install RVM:
-
-```ruby
-sudo apt-get install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-curl -sSL https://get.rvm.io | bash -s stable
-source ~/.rvm/scripts/rvm
-rvm install 2.5.3
-rvm use 2.5.3 --default
-ruby -v
-```
-
-> LINK
-> command line ruby cheat sheets: http://cheat.errtheblog.com/s/rvm
-
-Всё заработало, идём дальше...
-
 #### Список параметров:
 
 ```ruby
@@ -261,13 +242,19 @@ rake db:migrate
 
 Теперь, это настройки по-умолчанию.
 
-Едем дальше...
-
-Откроем консоль tux
-
-```bash
-tux
+#### Добавляем команду для запуска консоли в `Rakefile`. 
+#### Появится новая команда для запуска консоли: `rake db:console`
+```ruby
+namespace :db do
+  desc "Open an IRB session preloaded with the app"
+  task :console do
+    require 'irb'
+    ARGV.clear
+    IRB.start
+  end
+end
 ```
+Введем команду в консоли: `rake db:console`
 
 И введём:
 
