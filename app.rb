@@ -1,11 +1,10 @@
 #encoding: utf-8
-require 'rubygems'
-require 'sinatra'
-require 'sinatra/reloader'
-require 'sinatra/activerecord'
+require "rubygems"
+require "sinatra"
+require "sinatra/reloader"
+require "sinatra/activerecord"
 
-
-set :database, { adapter: 'sqlite3', database: 'barbershop.db' }
+set :database, { adapter: "sqlite3", database: "barbershop.db" }
 
 class Client < ActiveRecord::Base
 end
@@ -13,6 +12,45 @@ end
 class Barber < ActiveRecord::Base
 end
 
-get '/' do
-	erb "Hello!"			
+before do
+  @barbers = Barber.all
+end
+
+get "/" do
+  erb :index
+end
+
+get "/visit" do
+  erb :visit
+end
+
+post "/visit" do
+  @username = params[:username]
+  @phone = params[:phone]
+  @datetime = params[:datetime]
+  @barber = params[:barber]
+  @color = params[:color]
+
+  hh = {
+    username: "Введите имя",
+    phone: "Введите телефон",
+    datetime: "Введите дату и время",
+  }
+
+  # Обработка ошибок, проверка на пустое значение
+  @error = hh.select { |key, _| params[key] == "" }.values.join(", ")
+
+  # Возварт страницы если чтото не заполнено
+  return erb :visit if @error != ""
+
+  # Запись в базу данных
+  @client = Client.create(
+    name: @username,
+    phone: @phone,
+    datestamp: @datetime,
+    barber: @barber,
+    color: @color,
+  )
+
+  erb "Спасибо Вы записались"
 end
