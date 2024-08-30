@@ -25,16 +25,12 @@ get "/visit" do
 end
 
 post "/visit" do
-  @username = params[:username]
-  @phone = params[:phone]
-  @datetime = params[:datetime]
-  @barber = params[:barber]
-  @color = params[:color]
 
+  # Хеш с параметрами
   hh = {
     username: "Введите имя",
     phone: "Введите телефон",
-    datetime: "Введите дату и время",
+    datestamp: "Введите дату и время",
   }
 
   # Обработка ошибок, проверка на пустое значение
@@ -44,13 +40,8 @@ post "/visit" do
   return erb :visit if @error != ""
 
   # Запись в базу данных
-  @client = Client.create(
-    name: @username,
-    phone: @phone,
-    datestamp: @datetime,
-    barber: @barber,
-    color: @color
-  )
+  client = Client.new params[:client]
+  client.save
 
   erb "<h2>Спасибо Вы записались</h2>"
 end
