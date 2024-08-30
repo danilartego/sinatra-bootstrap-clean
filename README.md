@@ -332,9 +332,9 @@ end
 <p><a href="/clients"><< назад к списку записавшихся</a></p>
 ```
 
-##### В ActiveRecord есть штука, которая связывает автоматически посты и комментарии. Домашнее задание - найти это и написать движок блога.
+### Домашнее задание
 
-> Добавить выпадающий список с парикмахерами. (сделано)
-> Сделать прошлый блог с помощью ActiveRecord
-> Изучить ActiveRecord "one-to-many" (отношение сущностей)
-> https://guides.rubyonrails.org/association_basics.html
+- Добавить выпадающий список с парикмахерами. (сделано)  
+- Сделать прошлый блог с помощью ActiveRecord  
+- Изучить ActiveRecord "one-to-many" (отношение сущностей)  
+- https://guides.rubyonrails.org/association_basics.html  
