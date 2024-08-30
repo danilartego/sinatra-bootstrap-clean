@@ -26,31 +26,19 @@ get "/" do
 end
 
 get "/visit" do
+  @client = Client.new
   erb :visit
 end
 
 post "/visit" do
 
-  # Хеш с параметрами
-  hh = {
-    username: "Введите имя",
-    phone: "Введите телефон",
-    datestamp: "Введите дату и время",
-  }
-
-  # Обработка ошибок, проверка на пустое значение
-  @error = hh.select { |key, _| params[key] == "" }.values.join(", ")
-
-  # Возварт страницы если чтото не заполнено
-  return erb :visit if @error != ""
-
   # Запись в базу данных
-  client = Client.new params[:client]
+  @client = Client.new params[:client]
 
-  if client.save
+  if @client.save
     erb "<h2>Спасибо Вы записались</h2>"
   else
-    @error = client.errors.full_messages.first
+    @error = @client.errors.full_messages.first
     erb :visit
   end
 end

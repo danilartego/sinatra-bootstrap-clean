@@ -11,17 +11,30 @@
 <form action="/visit" method="POST" role="form">
   <div class="mb-3">
     <label class="form-label">Ваше имя:</label>
-    <input name="client[name]" type="text" class="form-control" placeholder="Введите ваше имя" value="">
+    <input name="client[name]" 
+            type="text" 
+            class="form-control" 
+            placeholder="Введите ваше имя" 
+            value="<%= @client.name %>">
   </div>
 
   <div class="mb-3">
     <label class="form-label">Ваш телефон:</label>
-    <input name="client[phone]" type="text" class="form-control" placeholder="Введите ваш телефон" value="">
+    <input name="client[phone]" 
+            type="text" 
+            class="form-control" 
+            placeholder="Введите ваш телефон" 
+            value="<%= @client.phone %>">
   </div>
 
   <div class="mb-3">
     <label class="form-label">Время записи:</label>
-    <input id="datetimepicker" name="client[datestamp]" type="text" class="form-control" placeholder="Введите дату и время" value="">
+    <input id="datetimepicker" 
+            name="client[datestamp]" 
+            type="text" 
+            class="form-control" 
+            placeholder="Введите дату и время" 
+            value="<%= @client.datestamp %>">
   </div>
 
   <!-- <div class="mb-3">
