@@ -7,6 +7,11 @@ require "sinatra/activerecord"
 set :database, { adapter: "sqlite3", database: "barbershop.db" }
 
 class Client < ActiveRecord::Base
+  validates :name, presence: true
+  validates :phone, presence: true
+  validates :datestamp, presence: true
+  # validates :barber, presence: true
+  validates :color, presence: true
 end
 
 class Barber < ActiveRecord::Base
@@ -41,7 +46,11 @@ post "/visit" do
 
   # Запись в базу данных
   client = Client.new params[:client]
-  client.save
 
-  erb "<h2>Спасибо Вы записались</h2>"
+  if client.save
+    erb "<h2>Спасибо Вы записались</h2>"
+  else
+    @error = client.errors.full_messages.first
+    erb :visit
+  end
 end
