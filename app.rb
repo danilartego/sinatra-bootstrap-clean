@@ -47,3 +47,14 @@ get "/barber/:id" do
   @barber = Barber.find(params[:id])
   erb :barber
 end
+
+get '/list_visit' do
+  # @client = Client.all
+  @client = Client.order('created_at DESC')
+  erb :list_visit
+end
+
+get '/client/:id' do
+  @client = Client.find(params[:id])
+  erb :client
+end
